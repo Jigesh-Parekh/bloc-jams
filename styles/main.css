@@ -37,7 +37,7 @@ body {
 .links-container .navbar-link {
 	display: table-cell;
 	position: relative;
-	height: 100%
+	height: 100%;
 	padding-left: 1rem;
 	padding-right: 1rem;
 	vertical-align: middle;
@@ -54,7 +54,7 @@ body {
 	color: rgba(233,50,117);
 }
 
-.conatiner {
+.container {
 	margin: 0 auto;
 	max-width: 64 rem;
 
