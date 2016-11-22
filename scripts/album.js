@@ -90,7 +90,7 @@
     var songNumber = parseInt($(this).attr('data-song-number'));
 
  	if (currentlyPlayingSongNumber !== null) {
- 		var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+ 		//var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
         currentlyPlayingCell.html(currentlyPlayingSongNumber);
  	} 
 
@@ -204,16 +204,35 @@ var getSongNumberCell = function(number){
     return $('.song-item-number[data-song-number="' + number + '"]');
 };
 
+var soundBarToggleSound = function () {
+    var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+    (currentSoundFile.isPaused() === true) ? togglePlay() : togglePause();
+
+    function togglePause () {
+        currentSoundFile.pause();
+        currentlyPlayingCell.html(playButtonTemplate);
+        soundBarButton.html(playerBarPlayButton);
+    };
+
+    function togglePlay () {
+        currentSoundFile.play();
+        currentlyPlayingCell.html(pauseButtonTemplate);
+        soundBarButton.html(playerBarPauseButton);
+    };
+};
+ 
  var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
  var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
  var playerBarPlayButton = '<span class="ion-play"></span>';
  var playerBarPauseButton = '<span class="ion-pause"></span>';
+ var soundBarButton = $('.main-controls .play-pause');
  
  var currentAlbum = null;
  var currentlyPlayingSongNumber = null;
  var currentSongFromAlbum = null;
  var currentSoundFile = null;
  var currentVolume = 80;
+ var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
 
  var $previousButton = $('.main-controls .previous');
  var $nextButton = $('.main-controls .next');
@@ -221,5 +240,6 @@ var getSongNumberCell = function(number){
 $(document).ready(function() {
 	setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
+    soundBarButton.click(soundBarToggleSound);
     $nextButton.click(nextSong);
  });
