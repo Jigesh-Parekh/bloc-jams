@@ -7,7 +7,7 @@
  		'<tr class="album-view-song-item">'
  	+	'  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
  	+	'	<td class="song-item-title">' + songName + '</td>'
- 	+	'	<td class="song-item-duration">' + songLength + '</td>'
+ 	+	'	<td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
  	+	'</tr>'
  	;
 
@@ -80,7 +80,7 @@
 
     $('.main-controls .play-pause').html(playerBarPauseButton);
 
-    setTotalTimeInPlayerBar(filterTimeCode(currentSongFromAlbum.length));
+    setTotalTimeInPlayerBar(filterTimeCode(currentSongFromAlbum.duration));
  };
 
  var trackIndex = function(album, song) {
@@ -98,6 +98,7 @@
 
     if (currentlyPlayingSongNumber !== songNumber) {
  		$(this).html(pauseButtonTemplate);
+        //clean out "currently playing song, when activating new song"
         setSong(songNumber);
         currentSoundFile.play();
         updateSeekBarWhileSongPlays();
